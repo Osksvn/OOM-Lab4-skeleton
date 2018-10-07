@@ -17,14 +17,14 @@ public class TimeZoneTranslatorTest {
 	@Test
 	public void testShiftTimeZone() {
 		DateTime time = new DateTime(2018, 10, 4, 17, 26, 30); 
-		String hardcodedTime = "2018-10-04 10:26:30";
+		String hardcodedTime = "2018-10-04 10:26";
 		String calculatedTime = TimeZoneTranslator.shiftTimeZone(time, 1, -6).toString();
 		 assertEquals("fail", hardcodedTime, calculatedTime);
 		System.out.println(String.format("===Time in Central Europe====\n%s", time.toString()));
 		System.out.println(String.format("===Time in Central America====\n%s", TimeZoneTranslator.shiftTimeZone(time, 1, -6).toString()));
 		
 		DateTime bugDate = new DateTime(2016, 01, 01, 06, 00, 00);
-		assertEquals("fail", "2015-12-31 21:00:00", TimeZoneTranslator.shiftTimeZone(bugDate, 1, -8).toString());
+		assertEquals("fail", "2015-12-31 21:00", TimeZoneTranslator.shiftTimeZone(bugDate, 1, -8).toString());
 		System.out.println(String.format("===bug date test===\n%s", TimeZoneTranslator.shiftTimeZone(bugDate, 1, -8).toString()));
 	}
 
@@ -36,8 +36,8 @@ public class TimeZoneTranslatorTest {
 		Place jonkopingUniversity = new Place("Jonkpoing University", 57.7785672,14.1614833,20.0);
 		Event study = new Event("Study time at Jonkoping University", startStudying, stopStudying, new HashSet<>(Arrays.asList(oskar)), jonkopingUniversity);
 		Event calculatedTime;
-		String studyStartTimeInBangladesh = "2017-08-15 13:00:00";
-		String studyEndTimeInBangladesh = "2020-06-15 20:00:00";
+		String studyStartTimeInBangladesh = "2017-08-15 13:00";
+		String studyEndTimeInBangladesh = "2020-06-15 20:00";
 		calculatedTime = TimeZoneTranslator.shiftEventTimeZone(study, TimeZone.CENTRAL_EUROPEAN_TIME, TimeZone.BANGLADESH);
 		assertEquals("fail", studyStartTimeInBangladesh, calculatedTime.getStartDate().toString());
 		assertEquals("faiL", studyEndTimeInBangladesh, calculatedTime.getEndDate().toString());
